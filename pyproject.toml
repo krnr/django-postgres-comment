@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "django-pg-label"
+version = "0.1.0"
+description = "Add comments to SQL queries to \"label\" them."
+authors = ["ylobanov <ylobanov@usetech.ru>"]
+repository = "https://gitlab.usetech.ru/pub/django-pg-label"
+license = "MIT"
+packages = [
+    { include = "django_pg_label", from = "src" },
+]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.6"
+django = "^2.0"
+
+[tool.poetry.dev-dependencies]
+pytest = "^5.4.3"
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
