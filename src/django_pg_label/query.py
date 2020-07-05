@@ -6,6 +6,8 @@ from django.db.models import QuerySet
 STOP_WORD = "DjangoPGlabel!:"
 ALWAYS = "true"
 query_rewrite_re = re.compile(r"/\*" + STOP_WORD + r"(.*?)\*/")
+# if query already used conditions in extra SQL will be like "AND (true)"
+# if only from set_label - "WHERE (true)"
 where_re = re.compile(r"(WHERE \(true\)) | (AND \(true\))")
 
 
@@ -21,7 +23,7 @@ def rewrite_query(sql: str):
 
 
 def monkeypatch_queryset():
-    """Patch QuerySet with the set_label method"""
+    """Patch QuerySet to add set_label method."""
     @monkey(QuerySet)
     def set_label(self, txt: str):
         return self.extra(where=[f"/*{STOP_WORD} {txt} */{ALWAYS}"])
@@ -30,7 +32,8 @@ def monkeypatch_queryset():
 def monkey(cls, name=None):
     """Monkey patches class or module by adding decorated function to it.
 
-    Anything overwritten could be accessed via .original attribute of decorated object.
+    If patched method overwrites existing one, anything overwritten could be accessed
+    via .original attribute of the decorated object.
     """
     err = "Attempting to monkey patch non-class and non-module"
     assert inspect.isclass(cls) or inspect.ismodule(cls), err
