@@ -1,0 +1,25 @@
+version: "3"
+services:
+  app:
+    image: pg_label_example
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    ports:
+      - 8088:8088
+    expose:
+      - 8088
+    depends_on:
+      - postgres 
+    command: bash entrypoint.sh run
+
+  postgres:
+    image: postgres:11
+    restart: on-failure
+    command: postgres -c shared_preload_libraries=pg_stat_statements -c pg_stat_statements.track=all -c max_connections=200
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_USER=test

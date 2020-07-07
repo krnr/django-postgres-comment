@@ -15,7 +15,7 @@ def rewrite_query(sql: str):
     """Combine SQL with added comment."""
     matches = query_rewrite_re.findall(sql)
     if matches:
-        comment = matches[0]
+        comment = " | ".join(matches)
         sql = query_rewrite_re.sub("", sql)
         sql = where_re.sub("", sql)
         sql = f"/* {comment} */ {sql}"
