@@ -53,11 +53,19 @@ class Performance(models.Model):
         return f"Play {self.play_id} performed at {self.date}"
 
 
+class TicketQuerySet(models.QuerySet):
+
+    def with_comment(self):
+        return self.all().set_label("annotated query")
+
+
 class Ticket(models.Model):
     """Model definition for Ticket."""
 
     performance = models.ForeignKey(Performance, on_delete=models.CASCADE)
     price = models.PositiveIntegerField()
+    
+    objects = TicketQuerySet.as_manager()
 
     class Meta:
         """Meta definition for Ticket."""

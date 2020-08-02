@@ -8,7 +8,8 @@ ALWAYS = "true"
 query_rewrite_re = re.compile(r"/\*" + STOP_WORD + r"(.*?)\*/")
 # if query already used conditions in extra SQL will be like "AND (true)"
 # if only from set_label - "WHERE (true)"
-where_re = re.compile(r"(WHERE \(true\)) | (AND \(true\))")
+and_re = re.compile(r" AND \(true\)")
+where_re = re.compile(r"(WHERE \(true\))|(WHERE \(\(true\)\))|(\(true\) AND )")
 
 
 def rewrite_query(sql: str):
@@ -17,7 +18,7 @@ def rewrite_query(sql: str):
     if matches:
         comment = " | ".join(matches)
         sql = query_rewrite_re.sub("", sql)
-        sql = where_re.sub("", sql)
+        sql = where_re.sub("", and_re.sub("", sql))
         sql = f"/* {comment} */ {sql}"
     return sql
 

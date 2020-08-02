@@ -65,5 +65,12 @@ Notification.objects.annotate(user_from_data=KeyTransform("user_id", "data")).se
 ```python
 qs = Ticket.objects.all().set_label("all tickets")
 qs = qs.filter(price__gt=100).set_label("greater than a hundred")
-print(qs.query)
 ```
+```sql
+(0.012) /*  all tickets  |  greater than a hundred  */ SELECT "main_app_ticket"."id",
+  "main_app_ticket"."performance_id",
+  "main_app_ticket"."price" 
+FROM "main_app_ticket" WHERE ("main_app_ticket"."price" > 100)  LIMIT 21; args=(100,)
+```
+
+при этом, если сделать `print(qs.query)`, то запрос будет выведен как есть - со стоп-словом, без манипуляций c SQL.
