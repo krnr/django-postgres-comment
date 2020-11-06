@@ -31,6 +31,8 @@ def set_label(self, text: str):
 
 ## использование
 
+в `INSTALLED_APPS` необходимо добавить `django_pg_label` (см. `exampleapp`).
+
 при старте апп-а происходит конфигурация: идет monkeypatch класса `QuerySet` в `django`, который дает нам
 искомый метод:
 
