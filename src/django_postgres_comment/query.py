@@ -3,7 +3,7 @@ import re
 
 from django.db.models import QuerySet
 
-STOP_WORD = "DjangoPGlabel!:"
+STOP_WORD = "DjangoPGComment!:"
 ALWAYS = "true"
 query_rewrite_re = re.compile(r"/\*" + STOP_WORD + r"(.*?)\*/")
 # if query already used conditions in extra SQL will be like "AND (true)"
@@ -54,3 +54,4 @@ def monkey(cls, name=None):
         return value
 
     return decorator
+

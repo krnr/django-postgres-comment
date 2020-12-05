@@ -1,4 +1,4 @@
 django>2.0
 psycopg2
--e ../../django-pg-label
+git+git://github.com/krnr/django-postgres-comment@github
 gunicorn

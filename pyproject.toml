@@ -1,12 +1,12 @@
 [tool.poetry]
-name = "django-pg-label"
+name = "django-postgres-comment"
 version = "0.1.0"
 description = "Add comments to SQL queries to \"label\" them."
-authors = ["ylobanov <ylobanov@usetech.ru>"]
-repository = "https://gitlab.usetech.ru/pub/django-pg-label"
-license = "MIT"
+authors = ["ylobanov <ultrasnet@mail.ru>"]
+repository = "https://github.com/krnr/django-postgres-comment"
+license = "GNU v3"
 packages = [
-    { include = "django_pg_label", from = "src" },
+    { include = "django_postgres_comment", from = "src" },
 ]
 readme = "README.md"
 

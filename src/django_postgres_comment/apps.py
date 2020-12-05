@@ -2,11 +2,11 @@ from django.apps import AppConfig
 from django.db import DEFAULT_DB_ALIAS, connections
 from django.db.backends.signals import connection_created
 
-from django_pg_label.query import monkeypatch_queryset, rewrite_query
+from django_postgres_comment.query import monkeypatch_queryset, rewrite_query
 
 
-class DjangoPGLabelConfig(AppConfig):
-    name = "django_pg_label"
+class DjangoPGCommentConfig(AppConfig):
+    name = "django_postgres_comment"
     verbose_name = "PostgreSQL comments"
 
     def ready(self):
@@ -35,3 +35,4 @@ def postgresql_connections():
     for alias in conn_names:
         connection = connections[alias]
         yield alias, connection
+
