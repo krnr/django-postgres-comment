@@ -7,8 +7,7 @@ ENV PATH="/opt/venv/bin:$PATH"
 COPY ./requirements.txt /
 
 RUN apt-get update \
-    && apt-get install -y gcc git libpq-dev python3-dev \
-    && pip install -r /requirements.txt
+    && apt-get install -y gcc git libpq-dev python3-dev 
 
 RUN python -m pip install -r /requirements.txt
 

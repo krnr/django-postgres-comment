@@ -1,4 +1,4 @@
 django>2.0
 psycopg2
--e git+https://gitlab.usetech.ru/pub/django-pg-label#egg=django-pg-label
+-e ../../django-pg-label
 gunicorn
